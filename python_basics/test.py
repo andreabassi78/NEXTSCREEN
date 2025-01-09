@@ -1,5 +1,5 @@
 import numpy
 
-print('Hi')
+print('Hallo')
 
 
