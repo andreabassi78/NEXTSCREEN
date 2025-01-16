@@ -7,6 +7,6 @@ def myfunc(a,b):
 myfirstnumber = 5.0
 mysecondnumber = 6.0
 
-print( myfunc(myfirstnumber, mysecondnumber))
+print( myfunc)
 
 
