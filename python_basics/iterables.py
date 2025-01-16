@@ -1,5 +1,8 @@
-# list
+# good description of the iterables here:
+# https://www.pythonlikeyoumeanit.com/Module2_EssentialsOfPython/Iterables.html
 
+
+# list
 myfirstlist = [1, 'st', 6.0, [2.0,3.0] ]
 mysecondlist = [4 , 3, 7, 8]
 
