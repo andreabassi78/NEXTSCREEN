@@ -12,7 +12,7 @@ c = np.zeros_like(a)
 columns_number = c.shape[1] 
 for idx in range(columns_number):
     c[:,idx] = a[:,idx]*b
-print('method1:',c)
+print(c)
 
 
 # method 2, repeat b to obtain a matrix with size a, not efficient memory-wise
@@ -36,7 +36,7 @@ c = a*b[:,np.newaxis] # newaxis expand the array adding a new empty dimension
 print(c)
 print(b[:,np.newaxis].shape)
 
-# method 5, Eistein sum, only for the brave
+# method 5, Eistein sum, only for the braves
 c = np.einsum('ij,i->ij', a, b)
 print(c) 
 # einsum is the tool of choice for tensors operations
