@@ -1,5 +1,7 @@
 import yolov5
 import os
+import urllib.request
+
 # load model
 model = yolov5.load('keremberke/yolov5m-blood-cell')
   
@@ -10,10 +12,8 @@ model.agnostic = False  # NMS class-agnostic
 model.multi_label = False  # NMS multiple labels per box
 model.max_det = 1000  # maximum number of detections per image
 
-import urllib.request
-
 # Load an image from a URL
-url = 'https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/python_basics/blood_cells.jpg'  # Replace with a valid image URL
+url = 'https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/python_basics/blood_cells.jpg'
 img = urllib.request.urlopen(url)
 
 # perform inference
@@ -32,7 +32,7 @@ categories = predictions[:, 5]
 results.show(labels=True)
 
 # save results into "results/" folder
-results.save(save_dir=os.path.join(folder,'saved','results'))
+#results.save(save_dir=os.path.join(folder,'saved','results'))
 
 # Results
 

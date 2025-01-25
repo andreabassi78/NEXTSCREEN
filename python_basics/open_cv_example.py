@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import urllib.request
 
 # Load an image from a URL
-url = 'https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/python_basics/meme.jpg'  # Replace with a valid image URL
+url = 'https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/python_basics/meme.jpg'
 response = urllib.request.urlopen(url)
 image_data = np.asarray(bytearray(response.read()), dtype=np.uint8)
 image = cv2.imdecode(image_data, cv2.IMREAD_COLOR)
