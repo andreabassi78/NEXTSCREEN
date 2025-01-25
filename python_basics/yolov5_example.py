@@ -12,8 +12,8 @@ model.agnostic = False  # NMS class-agnostic
 model.multi_label = False  # NMS multiple labels per box
 model.max_det = 1000  # maximum number of detections per image
 
-# Load an image from a URL
-url = 'https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/python_basics/blood_cells.jpg'
+# Load an image of cells from a URL
+url = 'https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/images/blood_cells.jpg'
 img = urllib.request.urlopen(url)
 
 # perform inference
