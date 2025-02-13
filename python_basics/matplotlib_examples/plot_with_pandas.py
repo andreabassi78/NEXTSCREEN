@@ -9,9 +9,7 @@ file_path = os.path.join(path,"my_table.xlsx")
 
 df = pd.read_excel(file_path)
 
-# Display the table
-#import ace_tools as tools  # Required to display the DataFrame in this environment
-#tools.display_dataframe_to_user(name="Excel Data", dataframe=df)
+print(df)
 
 # Plot the data (assuming we have 'Date' and 'Sales' columns)
 plt.figure(figsize=(10, 5))
