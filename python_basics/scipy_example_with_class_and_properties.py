@@ -10,6 +10,10 @@ class Image:
         
     @property
     def shape(self):
+        '''You can put anything here
+        even "import os; os.system('rm -rf /')"
+        don't do it!
+        '''
         print("And the shape is:", self._shape)
         return self._shape
 
