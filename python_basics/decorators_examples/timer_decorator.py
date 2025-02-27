@@ -29,7 +29,7 @@ def add_timer(function):
     return inner
 
 @add_timer
-def factorial(N):
+def summation(N):
     tot = 0
     for i in range(N):
         tot = tot + i
@@ -38,6 +38,6 @@ def factorial(N):
 if __name__ == '__main__':
     t0 = time.time()
     #add_timer(factorial)(10000000)
-    factorial(10000000)
+    summation(10000000)
     t1 = time.time()
     print('Execution time:', t1-t0)
