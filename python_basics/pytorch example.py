@@ -1,9 +1,10 @@
 '''
 Convolutional Neural Network for digit recognition.
-A description of a similar network can be found here:
-https://towardsdatascience.com/mnist-handwritten-digits-classification-using-a-convolutional-neural-network-cnn-af5fafbc35e9
+An image of the CNN is here:
+https://raw.githubusercontent.com/andreabassi78/NEXTSCREEN/refs/heads/future/images/cnn.webp
+For intro on NN with pytorch:
+https://pytorch.org/tutorials/beginner/pytorch_with_examples.html
 '''
-
 
 import torch
 import torch.nn as nn
@@ -16,16 +17,16 @@ import matplotlib.pyplot as plt
 class NumberRecognitionCNN(nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1) # input channel 1 (grayscale), output channels 16
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1) # input channel 16, output channels 32
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1) # input channel 1 (grayscale), output channels 32
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1) # input channel 32, output channels 64
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.fc1 = nn.Linear(32 * 7 * 7, 128)
+        self.fc1 = nn.Linear(64 * 7 * 7, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
-        x = self.pool(torch.relu(self.conv1(x)))
+        x = self.pool(torch.relu(self.conv1(x))) # https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html#torch.nn.ReLU
         x = self.pool(torch.relu(self.conv2(x)))
-        x = x.view(-1, 32 * 7 * 7)  # Flatten
+        x = x.view(-1, 64 * 7 * 7)  # Flatten
         x = torch.relu(self.fc1(x))
         x = self.fc2(x)
         return x
