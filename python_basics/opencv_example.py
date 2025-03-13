@@ -34,6 +34,5 @@ for (x, y, w, h) in faces:
 
 # Display the result
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('Detected Character: S')
 plt.axis('off')
 plt.show()
