@@ -89,3 +89,17 @@ for images, labels in test_loader:
 
 accuracy = 100 * correct / len(test_dataset)
 print(f"Accuracy: {accuracy:.2f}%")
+
+# Visualizing the learned kernels of the first convolutional layer
+def visualize_kernels(layer, num_kernels=32):
+    filters = layer.weight.data.clone()
+    fig, axes = plt.subplots(4, 8, figsize=(10, 5))
+    for i, ax in enumerate(axes.flat):
+        if i < num_kernels:
+            kernel = filters[i, 0].cpu().numpy()
+            ax.imshow(kernel, cmap='gray')
+            ax.axis('off')
+    plt.suptitle("First Convolutional Layer Kernels")
+    plt.show()
+
+visualize_kernels(model.conv1)
