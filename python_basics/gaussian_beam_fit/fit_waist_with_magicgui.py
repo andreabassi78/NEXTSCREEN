@@ -6,14 +6,11 @@ from scipy.interpolate import UnivariateSpline
 from magicgui import magicgui
 import pathlib
 import os
-from pint import Quantity 
-
 
 def gaussian(x, A, x0, w, offset):
     return A * np.exp(-((x - x0) ** 2) / (w ** 2)) + offset
 
-
-def _calculate_waist(file_path,camera_pixel,M,wavelenght,n):
+def _calculate_waist(file_path,camera_pixel,M,wavelenght,n,spline_constant):
 
     image = tifffile.imread(file_path)
     pixel_size = camera_pixel/M
@@ -42,7 +39,7 @@ def _calculate_waist(file_path,camera_pixel,M,wavelenght,n):
             plt.plot(y,gaussian(y,*popt), color='k')
 
     x = np.arange(num_cols) 
-    spl = UnivariateSpline(x, fwhm_values, s=100)
+    spl = UnivariateSpline(x, fwhm_values, s=spline_constant)
     fitted_fwhm_values = spl(x)
 
     #find the minimum FWHM value and its index
@@ -63,7 +60,6 @@ def _calculate_waist(file_path,camera_pixel,M,wavelenght,n):
     closest_right = np.argmin(np.abs(right_side - w_zr)) + min_index
     closest_right_value = fitted_fwhm_values[closest_right]
     zr_right = (closest_right-min_index)*pixel_size
-
 
     print(f"The minimum FWHM value is {min_fwhm:.2f} um, the waist is {min_w:.2f} um, at column {min_index}")
     print(f"Teoretical Rayleight distance {zr:.2f} um: FWHM: {w_zr:.2f}")
@@ -88,7 +84,6 @@ filename = 'beam_2_5_x.tiff'
 full_path = os.path.realpath(__file__)
 folder, _ = os.path.split(full_path) 
 FILE_PATH = os.path.join(folder,filename)
-
     
 @magicgui(
     call_button="Calculate parameters"
@@ -98,9 +93,10 @@ def calculate_waist(
     M:float = 2.5, # magnification of the SLM, given by the 4f system
     camera_pixel: float = 4.8,
     n:float = 1.0,
+    spline_constant: float =100,
     file_path = pathlib.Path(FILE_PATH)):
 
-    _calculate_waist(file_path,camera_pixel,M,wavelength,n)
+    _calculate_waist(file_path,camera_pixel,M,wavelength,n,spline_constant)
 
 calculate_waist.show(run=True)
 
