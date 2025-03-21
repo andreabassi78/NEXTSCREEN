@@ -72,7 +72,7 @@ for epoch in range(5):
     running_loss = 0.0
     for images, labels in train_loader:
         optimizer.zero_grad()
-        outputs = model(images)
+        outputs = model(images) #executing model.forward(images) method
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
