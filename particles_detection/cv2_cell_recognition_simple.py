@@ -84,11 +84,11 @@ def create_contours(cx,cy, img8bit, cnt, rect_size):
 
 
 
-RECT_SIZE = 20 #side of ROI that are extracted
-MIN_CELL_SIZE = 1*1 #cell area must be at least MIN_CELL_SIZE (px^2) to be detected as a cell
+RECT_SIZE = 100 #side of ROI that are extracted
+MIN_CELL_SIZE = 10*10 #cell area must be at least MIN_CELL_SIZE (px^2) to be detected as a cell
 ROI_SCALING = 2 #rescaling factor applied to the ROIs for displaying them larger
 #path = 'C:\\Users\\Andrea\\OneDrive - Politecnico di Milano\\Data\\PROCHIP\\Throughput_video\\'
-path = 'C:\\Users\\Andrea\\OneDrive - Politecnico di Milano\\Data\\NEXTSCREEN\\'
+path = 'C:\\Users\\Andrea\\OneDrive - Politecnico di Milano\\Data\\NEXTSCREEN\\Particle detection\\'
 
 #filename = 'dual_color_stack'
 #filename = 'selected_stack'
@@ -101,13 +101,13 @@ h,w = np.shape(im)
 tiffarray = np.zeros((h,w,im.n_frames))
 
 shown_rois = 0
-gain = 20
+gain = 1
 try:
     
     for i in range(im.n_frames-1):        
         im.seek(i)
         im_in = np.array(im)*gain
-        im_in = (im_in/256).astype('uint8') 
+        im_in = (im_in).astype('uint8') 
         t0 = time.time()
         cx, cy, cnts = find_cell(im_in, MIN_CELL_SIZE)
         #print('x positions of the centroids', cx)
