@@ -13,6 +13,7 @@ from time import perf_counter
 from typing import Any
 
 import cv2
+import napari
 import numpy as np
 from napari.layers import Image, Shapes
 from napari.qt.threading import thread_worker
@@ -286,6 +287,14 @@ class ParticleDetectionWidget(QWidget):
 
     def _build_ui(self) -> None:
         layout = QVBoxLayout(self)
+
+        instructions = QLabel(
+            "Open an image using <b>File → Open…</b>, select the image layer, "
+            "then press <b>Detect particles</b>. "
+            "Each bright particle is shown as a fixed-size square."
+        )
+        instructions.setWordWrap(True)
+        layout.addWidget(instructions)
 
         source_group = QGroupBox("Image source")
         source_form = QFormLayout(source_group)
@@ -613,7 +622,6 @@ class ParticleDetectionWidget(QWidget):
 
 
 def main() -> None:
-    import napari
     viewer = napari.Viewer(show=True)
 
     widget = ParticleDetectionWidget(viewer)
